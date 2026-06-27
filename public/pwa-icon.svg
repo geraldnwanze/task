@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="Task Ledger">
+  <rect width="512" height="512" rx="112" fill="#0f172a"/>
+  <path fill="#0f766e" d="M66 256c0-105 85-190 190-190s190 85 190 190-85 190-190 190S66 361 66 256Z"/>
+  <path fill="#f8fafc" d="M159 126h170c22 0 40 18 40 40v205c0 22-18 40-40 40H159c-22 0-40-18-40-40V166c0-22 18-40 40-40Z"/>
+  <path fill="#ccfbf1" d="M184 101h120c15 0 27 12 27 27v30H157v-30c0-15 12-27 27-27Z"/>
+  <path fill="#0f172a" d="M196 187h124v28H196zM196 254h103v28H196zM196 321h82v28H196z"/>
+  <path fill="#14b8a6" d="m161 196 13-13 14 14 33-38 14 12-46 54-28-29Zm0 67 13-13 14 14 33-38 14 12-46 54-28-29Z"/>
+  <circle cx="346" cy="344" r="82" fill="#0f172a"/>
+  <circle cx="346" cy="344" r="59" fill="#5eead4"/>
+  <path fill="#0f172a" d="M337 302h19v47l37 22-10 16-46-28v-57Z"/>
+  <circle cx="172" cy="346" r="38" fill="#facc15"/>
+  <path fill="#713f12" d="M181 324v9h18v17h-18v10h21v17h-21v12h-17v-12h-18v-17h18v-10h-15c-14 0-23-9-23-21s9-22 23-22h15v-11h17v11h18v17h-18Zm-17 9h-13c-4 0-7 3-7 6s3 6 7 6h13v-12Z"/>
+</svg>

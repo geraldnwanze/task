@@ -1,0 +1,49 @@
+{
+  "name": "Task Ledger",
+  "short_name": "TaskLedger",
+  "description": "Track tasks, reminders, and recurring expenditure.",
+  "start_url": "/#/tasks",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f1f5f9",
+  "theme_color": "#0f766e",
+  "categories": ["productivity", "finance"],
+  "icons": [
+    {
+      "src": "/pwa-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tasks",
+      "short_name": "Tasks",
+      "url": "/#/tasks"
+    },
+    {
+      "name": "Expenses",
+      "short_name": "Expenses",
+      "url": "/#/expenses"
+    },
+    {
+      "name": "Reminders",
+      "short_name": "Reminders",
+      "url": "/#/reminders"
+    }
+  ]
+}
