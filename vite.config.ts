@@ -4,7 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import type { IncomingMessage, ServerResponse } from 'node:http'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { defineConfig, type Plugin } from 'vite'
+import { defineConfig, type Plugin, type ResolvedConfig } from 'vite'
 
 const projectRoot = dirname(fileURLToPath(import.meta.url))
 const dataFilePath = resolve(projectRoot, 'data/task-data.json')
@@ -71,8 +71,34 @@ const taskDataPlugin = (): Plugin => ({
   name: 'task-data-file-api',
 })
 
+const pwaBuildVersionPlugin = (): Plugin => {
+  let viteConfig: ResolvedConfig
+
+  return {
+    closeBundle() {
+      if (viteConfig.command !== 'build') {
+        return
+      }
+
+      const swSourcePath = resolve(projectRoot, 'public/sw.js')
+      const swOutputPath = resolve(projectRoot, viteConfig.build.outDir, 'sw.js')
+      const buildId = `${Date.now()}`
+      const swSource = readFileSync(swSourcePath, 'utf-8')
+
+      writeFileSync(
+        swOutputPath,
+        swSource.replaceAll('__TASK_LEDGER_BUILD_ID__', buildId),
+      )
+    },
+    configResolved(resolvedConfig) {
+      viteConfig = resolvedConfig
+    },
+    name: 'pwa-build-version',
+  }
+}
+
 export default defineConfig({
-  plugins: [react(), tailwindcss(), taskDataPlugin()],
+  plugins: [react(), tailwindcss(), taskDataPlugin(), pwaBuildVersionPlugin()],
   server: {
     watch: {
       ignored: ['**/data/task-data.json'],

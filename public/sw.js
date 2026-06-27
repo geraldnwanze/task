@@ -1,4 +1,5 @@
-const CACHE_NAME = 'task-ledger-v2'
+const BUILD_ID = '__TASK_LEDGER_BUILD_ID__'
+const CACHE_NAME = `task-ledger-${BUILD_ID}`
 const APP_SHELL = [
   '/',
   '/manifest.webmanifest',
@@ -13,6 +14,12 @@ self.addEventListener('install', (event) => {
     caches.open(CACHE_NAME).then((cache) => cache.addAll(APP_SHELL)),
   )
   self.skipWaiting()
+})
+
+self.addEventListener('message', (event) => {
+  if (event.data?.type === 'SKIP_WAITING') {
+    self.skipWaiting()
+  }
 })
 
 self.addEventListener('activate', (event) => {
