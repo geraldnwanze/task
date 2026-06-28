@@ -13,6 +13,8 @@ type ExpenseHistoryProps = {
   frequencies: ExpenseFrequency[]
 }
 
+type HistoryTab = 'all' | ExpenseFrequency
+
 type HistoryGroup = {
   key: string
   label: string
@@ -31,10 +33,14 @@ const weekStart = (date: Date) => {
   return clone
 }
 
-const groupLabel = (dateValue: string, frequency: ExpenseFrequency) => {
+const groupLabel = (dateValue: string, frequency: HistoryTab) => {
   const date = new Date(dateValue)
   const year = date.getFullYear()
   const month = date.getMonth()
+
+  if (frequency === 'all') {
+    return 'All expenses'
+  }
 
   if (frequency === 'daily') {
     return formatDate(dateValue)
@@ -59,10 +65,14 @@ const groupLabel = (dateValue: string, frequency: ExpenseFrequency) => {
   return `${year}`
 }
 
-const groupKey = (dateValue: string, frequency: ExpenseFrequency) => {
+const groupKey = (dateValue: string, frequency: HistoryTab) => {
   const date = new Date(dateValue)
   const year = date.getFullYear()
   const month = date.getMonth()
+
+  if (frequency === 'all') {
+    return 'all'
+  }
 
   if (frequency === 'daily') {
     return `${year}-${pad(month + 1)}-${pad(date.getDate())}`
@@ -88,13 +98,16 @@ const groupKey = (dateValue: string, frequency: ExpenseFrequency) => {
   return `${year}`
 }
 
+const labelForHistoryTab = (tab: HistoryTab) =>
+  tab === 'all' ? 'All' : labelForFrequency(tab)
+
 export function ExpenseHistory({ expenses, frequencies }: ExpenseHistoryProps) {
-  const [activeFrequency, setActiveFrequency] =
-    useState<ExpenseFrequency>('monthly')
+  const historyTabs: HistoryTab[] = ['all', ...frequencies]
+  const [activeFrequency, setActiveFrequency] = useState<HistoryTab>('all')
 
   const groups = useMemo(() => {
     const matchingExpenses =
-      activeFrequency === 'daily'
+      activeFrequency === 'all'
         ? expenses
         : expenses.filter((expense) => expense.frequency === activeFrequency)
     const grouped = new Map<string, HistoryGroup>()
@@ -126,12 +139,12 @@ export function ExpenseHistory({ expenses, frequencies }: ExpenseHistoryProps) {
         <div>
           <h2 className="text-lg font-bold text-slate-950">Expense history</h2>
           <p className="text-sm text-slate-500">
-            Review scheduled expenditure by daily, weekly, monthly, quarterly,
-            semiannual, and annual views.
+            Review all scheduled expenditure or filter by daily, weekly,
+            monthly, quarterly, semiannual, and annual expenses.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {frequencies.map((frequency) => (
+          {historyTabs.map((frequency) => (
             <button
               className={`rounded-md border px-3 py-2 text-sm font-semibold ${
                 activeFrequency === frequency
@@ -142,7 +155,7 @@ export function ExpenseHistory({ expenses, frequencies }: ExpenseHistoryProps) {
               onClick={() => setActiveFrequency(frequency)}
               type="button"
             >
-              {labelForFrequency(frequency)}
+              {labelForHistoryTab(frequency)}
             </button>
           ))}
         </div>

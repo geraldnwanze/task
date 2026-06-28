@@ -1,7 +1,7 @@
 import type { ExpenseFrequency, ReminderLeadUnit } from '../types'
 
-const currencyFormatter = new Intl.NumberFormat('en-US', {
-  currency: 'USD',
+const currencyFormatter = new Intl.NumberFormat('en-NG', {
+  currency: 'NGN',
   style: 'currency',
 })
 

@@ -13,5 +13,20 @@
       "title": "hello this is a reminder"
     }
   ],
-  "expenses": []
+  "expenses": [
+    {
+      "amount": 5000,
+      "category": "ouiyuguoiu",
+      "createdAt": "2026-06-28T08:12:51.322Z",
+      "frequency": "monthly",
+      "id": "mqxih81m-re3ph0d",
+      "name": "khjgvvohig",
+      "nextDueAt": "2026-07-05T09:00",
+      "notes": "uiyufyyyuuoyiufygciyuugh",
+      "reminderAt": "2026-07-02T09:00",
+      "reminderLeadUnit": "days",
+      "reminderLeadValue": 3,
+      "status": "scheduled"
+    }
+  ]
 }
